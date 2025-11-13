@@ -1,0 +1,11 @@
+- name: Install prerequisites for apt over HTTPS
+	ansible.builtin.apt:
+		pkg:
+			- apt-transport-https
+			- ca-certificates
+			- curl
+			- gnupg
+
+
+
+
