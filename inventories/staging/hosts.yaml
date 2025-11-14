@@ -6,10 +6,10 @@ bastions:
 
 workers:
   hosts:
-    node0:
+    node-0:
       ansible_host: 10.152.159.225
       ansible_user: root
-    node1:
+    node-1:
       ansible_host: 10.152.159.162
       ansible_user: root
 

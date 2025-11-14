@@ -1,0 +1,11 @@
+- hosts:
+  - bastions
+  - controllers
+  - workers
+  roles:
+    - common
+
+- hosts:
+  - bastions
+  roles:
+    - bastion

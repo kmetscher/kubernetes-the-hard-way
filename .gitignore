@@ -50,3 +50,4 @@ service-account-csr.json
 *.swp
 .idea/
 .venv/
+certificates/
