@@ -12,7 +12,6 @@
     types: deb
     uris: https://pkgs.k8s.io/core:/stable:/v1.34/deb/
     suites: '/'
-    components: main
     architectures: amd64
     signed_by: https://pkgs.k8s.io/core:/stable:/v1.34/deb/Release.key
   notify:
