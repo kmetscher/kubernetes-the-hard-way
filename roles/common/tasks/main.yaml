@@ -17,3 +17,9 @@
   notify:
     - Update package lists
 
+- name: Update hosts file
+  ansible.builtin.template:
+    src: hosts
+    dest: /etc/hosts
+    backup: true
+
