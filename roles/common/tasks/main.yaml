@@ -1,21 +1,20 @@
 - name: Install prerequisites for apt over HTTPS
-  become: true
-	ansible.builtin.apt:
-		pkg:
-			- apt-transport-https
-			- ca-certificates
-			- curl
-			- gnupg
+  ansible.builtin.apt:
+    pkg:
+      - apt-transport-https
+      - ca-certificates
+      - curl
+      - gnupg
 
 - name: Add k8s repo
-  become: true
-	ansible.builtin.deb822_repo:
-		name: kubernetes
-		types: deb
-		uris: https://pkgs.k8s.io/core:/stable:/v1.34/deb/
-		suites: '/'
-		components: main
-		architectures: amd64
-		signed_by: https://pkgs.k8s.io/core:/stable:/v1.34/deb/Release.key
-	notify:
-		- Update package lists
+  ansible.builtin.deb822_repository:
+    name: kubernetes
+    types: deb
+    uris: https://pkgs.k8s.io/core:/stable:/v1.34/deb/
+    suites: '/'
+    components: main
+    architectures: amd64
+    signed_by: https://pkgs.k8s.io/core:/stable:/v1.34/deb/Release.key
+  notify:
+    - Update package lists
+

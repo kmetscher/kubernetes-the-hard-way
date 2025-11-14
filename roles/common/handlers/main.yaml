@@ -1,4 +1,3 @@
 - name: Update package lists
-  become: true
   ansible.builtin.apt:
-	  update_cache: yes
+    update_cache: yes
