@@ -1,4 +1,77 @@
-- name: Install etcd
+- name: Install etcd-server
   ansible.builtin.apt:
-      name: etcd
+      name: etcd-server
       state: present
+
+- name: Install etcd-client
+  ansible.builtin.apt:
+    name: etcd-client
+    state: present
+
+- name: Make etcd configuration directory
+  ansible.builtin.file:
+    path: /etc/etcd
+    state: directory
+    owner: etcd
+    mode: '700'
+
+- name: Make etcd data directory
+  ansible.builtin.file:
+    path: /var/lib/etcd
+    state: directory
+    owner: etcd
+    mode: '700'
+
+- name: Copy etcd unit file
+  ansible.builtin.copy:
+    dest: /etc/systemd/system/etcd.service
+    src: etcd.service
+    owner: root
+
+- name: Install kube-apiserver
+  ansible.builtin.get_url:
+    url: https://dl.k8s.io/v1.32.3/bin/linux/amd64/kube-apiserver
+    dest: /usr/local/bin/kube-apiserver
+    mode: '744'
+
+- name: Install kube-controller-manager
+  ansible.builtin.get_url:
+    url: https://dl.k8s.io/v1.32.3/bin/linux/amd64/kube-controller-manager
+    dest: /usr/local/bin/kube-controller-manager
+    mode: '744'
+
+- name: Install kube-scheduler
+  ansible.builtin.get_url:
+    url: https://dl.k8s.io/v1.32.3/bin/linux/amd64/kube-scheduler
+    dest: /usr/local/bin/kube-scheduler
+    mode: '744'
+
+- name: Install kubectl
+  ansible.builtin.apt:
+    name: kubectl
+    state: present
+
+- name: Make kubernetes config directory
+  ansible.builtin.file:
+    path: /etc/kubernetes/config
+    state: directory
+
+- name: Make kubernetes data directory
+  ansible.builtin.file:
+    path: /var/lib/kubernetes
+    state: directory
+
+- name: Copy apiserver unit file
+  ansible.builtin.copy:
+    src: kube-apiserver.service
+    dest: /etc/systemd/system/kube-apiserver.service
+
+- name: Copy controller-manager unit file
+  ansible.builtin.copy:
+    src: kube-controller-manager.service
+    dest: /etc/systemd/system/kube-controller-manager.service
+
+- name: Copy scheduler unit file
+  ansible.builtin.copy:
+    src: kube-scheduler.service
+    dest: /etc/systemd/system/kube-scheduler.service

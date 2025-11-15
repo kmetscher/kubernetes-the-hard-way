@@ -15,3 +15,8 @@
   - workers
   roles:
     - cluster
+
+- hosts:
+  - servers
+  roles:
+    - server
