@@ -1,0 +1,4 @@
+- name: Install etcd
+  ansible.builtin.apt:
+      name: etcd
+      state: present
