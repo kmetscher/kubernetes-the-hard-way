@@ -1,6 +1,6 @@
 127.0.0.1 localhost
 127.0.1.1 {{ ansible_hostname }}
-{% for host in groups['controllers'] %}
+{% for host in groups['servers'] %}
 {{ hostvars[host].ansible_host }} {{ hostvars[host].inventory_hostname }}
 {% endfor %}
 {% for host in groups['workers'] %}

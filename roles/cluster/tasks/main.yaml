@@ -1,0 +1,5 @@
+- name: Add bastion SSH key to cluster nodes
+  ansible.posix.authorized_key:
+    user: root
+    state: present
+    key: "{{ lookup('file', 'keys/id_ed25519.pub') }}"

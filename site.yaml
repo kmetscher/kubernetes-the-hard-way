@@ -1,6 +1,6 @@
 - hosts:
   - bastions
-  - controllers
+  - servers
   - workers
   roles:
     - common
@@ -9,3 +9,9 @@
   - bastions
   roles:
     - bastion
+
+- hosts:
+  - servers
+  - workers
+  roles:
+    - cluster

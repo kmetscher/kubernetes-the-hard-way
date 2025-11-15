@@ -13,7 +13,7 @@ workers:
       ansible_host: 10.152.159.162
       ansible_user: root
 
-controllers:
+servers:
   hosts:
     server:
       ansible_host: 10.152.159.115
