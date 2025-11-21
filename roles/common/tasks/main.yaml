@@ -1,4 +1,5 @@
 - name: Install prerequisites for apt over HTTPS
+  become: true
   ansible.builtin.apt:
     pkg:
       - apt-transport-https
@@ -7,6 +8,7 @@
       - gnupg
 
 - name: Add k8s repo
+  become: true
   ansible.builtin.deb822_repository:
     name: kubernetes
     types: deb
@@ -18,6 +20,7 @@
     - Update package lists
 
 - name: Update hosts file
+  become: true
   ansible.builtin.template:
     src: hosts
     dest: /etc/hosts
