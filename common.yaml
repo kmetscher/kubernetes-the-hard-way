@@ -1,0 +1,6 @@
+- hosts:
+  - bastions
+  - servers
+  - workers
+  roles:
+    - common
