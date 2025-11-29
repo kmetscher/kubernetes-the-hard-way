@@ -27,7 +27,7 @@
     backup: true
 
 - name: Install kubectl
-	ansible.builtin.apt:
-		name: kubectl
-		state: present
+  ansible.builtin.apt:
+    name: kubectl
+    state: present
 

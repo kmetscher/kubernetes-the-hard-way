@@ -8,8 +8,8 @@ for host in node-0 node-1; do
 		--kubeconfig=kubeconfigs/${host}.kubeconfig
 
 	kubectl config set-credentials system:node:${host} \
-		--client-certificate=${host}.crt \
-		--client-key=${host}.key \
+		--client-certificate=certificates/${host}.crt \
+		--client-key=certificates/${host}.key \
 		--embed-certs=true \
 		--kubeconfig=kubeconfigs/${host}.kubeconfig
 
@@ -29,8 +29,8 @@ kubectl config set-cluster kubernetes-the-hard-way \
 	--kubeconfig=kubeconfigs/kube-proxy.kubeconfig
 
 kubectl config set-credentials system:kube-proxy \
-  --client-certificate=kube-proxy.crt \
-	--client-key=kube-proxy.key \
+  --client-certificate=certificates/kube-proxy.crt \
+	--client-key=certificates/kube-proxy.key \
   --embed-certs=true \
   --kubeconfig=kubeconfigs/kube-proxy.kubeconfig
 
@@ -49,8 +49,8 @@ kubectl config set-cluster kubernetes-the-hard-way \
 	--kubeconfig=kubeconfigs/kube-scheduler.kubeconfig
 
 kubectl config set-credentials system:kube-scheduler \
-	--client-certificate=kube-scheduler.crt \
-	--client-key=kube-scheduler.key \
+	--client-certificate=certificates/kube-scheduler.crt \
+	--client-key=certificates/kube-scheduler.key \
 	--embed-certs=true \
 	--kubeconfig=kubeconfigs/kube-scheduler.kubeconfig
 
@@ -69,8 +69,8 @@ kubectl config set-cluster kubernetes-the-hard-way \
   --kubeconfig=kubeconfigs/admin.kubeconfig
 
 kubectl config set-credentials admin \
-  --client-certificate=admin.crt \
-  --client-key=admin.key \
+  --client-certificate=certificates/admin.crt \
+  --client-key=certificates/admin.key \
   --embed-certs=true \
   --kubeconfig=kubeconfigs/admin.kubeconfig
 
