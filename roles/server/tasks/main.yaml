@@ -28,6 +28,12 @@
     src: etcd.service
     owner: root
 
+- name: Start etcd
+  ansible.builtin.service:
+    name: etcd
+    state: restarted
+    enabled: true
+
 - name: Install kube-apiserver
   ansible.builtin.get_url:
     url: https://dl.k8s.io/v1.32.3/bin/linux/amd64/kube-apiserver
@@ -45,11 +51,6 @@
     url: https://dl.k8s.io/v1.32.3/bin/linux/amd64/kube-scheduler
     dest: /usr/local/bin/kube-scheduler
     mode: '744'
-
-- name: Install kubectl
-  ansible.builtin.apt:
-    name: kubectl
-    state: present
 
 - name: Make kubernetes config directory
   ansible.builtin.file:
@@ -75,3 +76,21 @@
   ansible.builtin.copy:
     src: kube-scheduler.service
     dest: /etc/systemd/system/kube-scheduler.service
+
+- name: Start kube-apiserver
+  ansible.builtin.service:
+    name: kube-apiserver
+    state: restarted
+    enabled: true
+
+- name: Start kube-controller-manager
+  ansible.builtin.service:
+    name: kube-controller-manager
+    state: restarted
+    enabled: true
+
+- name: Start kube-scheduler
+  ansible.builtin.service:
+    name: kube-scheduler
+    state: restarted
+    enabled: true
