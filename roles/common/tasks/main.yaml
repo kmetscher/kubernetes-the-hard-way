@@ -26,3 +26,8 @@
     dest: /etc/hosts
     backup: true
 
+- name: Install kubectl
+	ansible.builtin.apt:
+		name: kubectl
+		state: present
+
