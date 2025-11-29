@@ -88,6 +88,7 @@
   ansible.builtin.get_url:
     url: https://dl.k8s.io/v1.32.3/bin/linux/arm64/kube-proxy
     dest: /usr/local/bin/kube-proxy
+    mode: '0755'
 
 - name: Install kubelet
   become: true
@@ -119,6 +120,7 @@
     src: containerd.service
     dest: /etc/systemd/system/containerd.service
     backup: true
+  notify: Reload service configurations
 
 - name: Write containerd config file
   become: true
@@ -128,11 +130,11 @@
     backup: true
 
 - name: Copy kubelet unit file
-  become: true
   ansible.builtin.template:
     src: kubelet.service
     dest: /etc/systemd/system/kubelet.service
     backup: true
+  notify: Reload service configurations
 
 - name: Write kubelet config file
   become: true
@@ -142,11 +144,11 @@
     backup: true
 
 - name: Copy kube-proxy unit file
-  become: true
   ansible.builtin.template:
     src: kube-proxy.service
     dest: /etc/systemd/system/kube-proxy.service
     backup: true
+  notify: Reload service configurations
 
 - name: Write kube-proxy config file
   become: true
@@ -154,3 +156,21 @@
     src: kube-proxy-config.yaml
     dest: /var/lib/kube-proxy/kube-proxy-config.yaml
     backup: true
+
+- name: Start containerd
+  ansible.builtin.service:
+    name: containerd
+    state: restarted
+    enabled: true
+
+- name: Start kubelet
+  ansible.builtin.service:
+    name: kubelet
+    state: restarted
+    enabled: true
+
+- name: Start kube-proxy
+  ansible.builtin.service:
+    name: kube-proxy
+    state: restarted
+    enabled: true
