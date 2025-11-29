@@ -36,19 +36,19 @@
 
 - name: Install kube-apiserver
   ansible.builtin.get_url:
-    url: https://dl.k8s.io/v1.32.3/bin/linux/amd64/kube-apiserver
+    url: https://dl.k8s.io/v1.32.3/bin/linux/arm64/kube-apiserver
     dest: /usr/local/bin/kube-apiserver
     mode: '744'
 
 - name: Install kube-controller-manager
   ansible.builtin.get_url:
-    url: https://dl.k8s.io/v1.32.3/bin/linux/amd64/kube-controller-manager
+    url: https://dl.k8s.io/v1.32.3/bin/linux/arm64/kube-controller-manager
     dest: /usr/local/bin/kube-controller-manager
     mode: '744'
 
 - name: Install kube-scheduler
   ansible.builtin.get_url:
-    url: https://dl.k8s.io/v1.32.3/bin/linux/amd64/kube-scheduler
+    url: https://dl.k8s.io/v1.32.3/bin/linux/arm64/kube-scheduler
     dest: /usr/local/bin/kube-scheduler
     mode: '744'
 
@@ -76,6 +76,24 @@
   ansible.builtin.copy:
     src: kube-scheduler.service
     dest: /etc/systemd/system/kube-scheduler.service
+
+- name: Copy kube-scheduler config file
+  ansible.builtin.copy:
+    src: kube-scheduler.yaml
+    dest: /etc/kubernetes/config/kube-scheduler.yaml
+    backup: true
+
+- name: Copy scheduler kubeconfig
+  ansible.builtin.copy:
+    src: kube-scheduler.kubeconfig
+    dest: /var/lib/kubernetes/kube-scheduler.kubeconfig
+    backup: true
+
+- name: Copy controller-manager kubeconfig
+  ansible.builtin.copy:
+    src: kube-controller-manager.kubeconfig
+    dest: /var/lib/kubernetes/kube-controller-manager.kubeconfig
+    backup: true
 
 - name: Start kube-apiserver
   ansible.builtin.service:

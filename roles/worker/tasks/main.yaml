@@ -86,7 +86,7 @@
 - name: Install kube-proxy
   become: true
   ansible.builtin.get_url:
-    url: https://dl.k8s.io/v1.32.3/bin/linux/amd64/kube-proxy
+    url: https://dl.k8s.io/v1.32.3/bin/linux/arm64/kube-proxy
     dest: /usr/local/bin/kube-proxy
 
 - name: Install kubelet
