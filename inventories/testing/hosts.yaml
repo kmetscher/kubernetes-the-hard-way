@@ -1,21 +1,21 @@
 bastions:
   hosts:
     jumpbox:
-      ansible_host: 10.152.159.153
+      ansible_host: 192.168.64.13
       ansible_user: root
 
 workers:
   hosts:
     node-0:
-      ansible_host: 192.168.1.121
-      ansible_user: c0w80yd4n
+      ansible_host: 192.168.64.8
+      ansible_user: root
     node-1:
-      ansible_host: 192.168.1.214
-      ansible_user: c0w80yd4n
+      ansible_host: 192.168.64.10
+      ansible_user: root
 
 servers:
   hosts:
     server:
-      ansible_host: 10.152.159.115
+      ansible_host: 192.168.64.12
       ansible_user: root
 

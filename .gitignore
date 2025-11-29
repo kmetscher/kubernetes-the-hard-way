@@ -48,6 +48,10 @@ service-account.csr
 service-account.pem
 service-account-csr.json
 *.swp
+*.crt
+*.key
+*.crl
+*.csr
 .idea/
 .venv/
 certificates/
