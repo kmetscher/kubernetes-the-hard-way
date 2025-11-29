@@ -43,6 +43,26 @@ kubectl config use-context default \
 	--kubeconfig=kubeconfigs/kube-proxy.kubeconfig
 
 kubectl config set-cluster kubernetes-the-hard-way \
+  --certificate-authority=certificates/ca.crt \
+  --embed-certs=true \
+  --server=https://server.kubernetes.local:6443 \
+  --kubeconfig=kubeconfigs/kube-controller-manager.kubeconfig
+
+kubectl config set-credentials system:kube-controller-manager \
+  --client-certificate=certificates/kube-controller-manager.crt \
+  --client-key=certificates/kube-controller-manager.key \
+  --embed-certs=true \
+  --kubeconfig=kubeconfigs/kube-controller-manager.kubeconfig
+
+kubectl config set-context default \
+  --cluster=kubernetes-the-hard-way \
+  --user=system:kube-controller-manager \
+  --kubeconfig=kubeconfigs/kube-controller-manager.kubeconfig
+
+kubectl config use-context default \
+  --kubeconfig=kubeconfigs/kube-controller-manager.kubeconfig
+
+kubectl config set-cluster kubernetes-the-hard-way \
 	--certificate-authority=certificates/ca.crt \
 	--embed-certs=true \
 	--server=https://server.kubernetes.local:6443 \
